@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {toast} from 'react-toastify';
 
 type ItemProps = {
@@ -9,37 +9,55 @@ type ItemProps = {
 function App() {
 
   const [list, setList] = useState<ItemProps[]>([]);
-  const [task, setTask] = useState('');
+  const [taskValue, setTask] = useState('');
 
-  function addTask() {
+  useEffect(() => loadTasks(), []);
 
-    if (task === '') {
+  function handleAddTask() {
+
+    if (taskValue === '') {
       toast.error('Digite alguma tarefa!');
       return;
     }
     const newList = [...list, {
       id: Math.floor(Math.random() * 10000),
-      task: task,
+      task: taskValue,
       finished: false
     }];
 
     setList(newList);
     setTask('');
+
+    showTasks(newList);
   }
 
-  function handleChangeItem(id: number) {
-    setList((prevState) => {
-      return prevState.map((item) =>
-        item.id === id ? { ...item, finished: !item.finished } : item
-      );
-    });
+  function showTasks(list: ItemProps[]) {
+    setList(list);
+    localStorage.setItem('todoList', JSON.stringify(list));
   }
 
-  function deleteItem(id: number) {
-    const newList = list.filter((item) => item.id !== id)
+  function handleChangeTask(id: number) {
+      const newList = list.map((item) => {
+          return item.id === id ? { ...item, finished: !item.finished } : item
+      });
 
-    setList(newList)
+      showTasks(newList)
+    }
+    
+    function handleDeleteTask(id: number) {
+      const newList = list.filter((item) => item.id !== id);
+      
+      showTasks(newList);
   }
+
+  function loadTasks() {
+    const tasks = localStorage.getItem('todoList');
+
+    if (tasks) {
+      setList(JSON.parse(tasks));
+    }
+  }
+
   return (
     <>
       <div className="container">
@@ -47,12 +65,12 @@ function App() {
             <input
               placeholder="O que tenho que fazer..."
               className="input"
-              value={task}
+              value={taskValue}
               onChange={(event) => setTask(event.target.value)}
               />
             <button
               className="button"
-              onClick={addTask}
+              onClick={handleAddTask}
               >
                 Adicionar
             </button>
@@ -66,14 +84,14 @@ function App() {
               <li className={`item ${item.finished && 'active'}`} key={item.id}>
                   <button
                     className="edit-button"
-                    onClick={() => handleChangeItem(item.id)}
+                    onClick={() => handleChangeTask(item.id)}
                     >
                       <i className='bx bxs-rocket'></i>
                   </button>
                   <span>{item.task}</span>
                   <button
                     className="trash-button"
-                    onClick={() => deleteItem(item.id)}>
+                    onClick={() => handleDeleteTask(item.id)}>
                       <i className='bx bxs-trash-alt'></i>
                   </button>
               </li>
