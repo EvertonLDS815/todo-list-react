@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
 import {toast} from 'react-toastify';
 
 type ItemProps = {
@@ -50,6 +50,12 @@ function App() {
       showTasks(newList);
   }
 
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      handleAddTask();
+    }
+  }
+  
   function loadTasks() {
     const tasks = localStorage.getItem('todoList');
 
@@ -67,6 +73,7 @@ function App() {
               className="input"
               value={taskValue}
               onChange={(event) => setTask(event.target.value)}
+              onKeyDown={(event) => handleKeyDown(event)}
               />
             <button
               className="button"
