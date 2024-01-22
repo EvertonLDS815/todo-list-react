@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import {toast} from 'react-toastify';
 
 type ItemProps = {
   id: number;
@@ -12,6 +12,11 @@ function App() {
   const [task, setTask] = useState('');
 
   function addTask() {
+
+    if (task === '') {
+      toast.error('Digite alguma tarefa!');
+      return;
+    }
     const newList = [...list, {
       id: Math.floor(Math.random() * 10000),
       task: task,
@@ -29,7 +34,6 @@ function App() {
       );
     });
   }
-    console.log(list)
 
   function deleteItem(id: number) {
     const newList = list.filter((item) => item.id !== id)
