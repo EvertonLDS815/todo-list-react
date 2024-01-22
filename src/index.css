@@ -6,7 +6,7 @@
 }
 
 body {
-  background-image: url(./neom-background.jpg);
+  background-image: url(/neom-background.jpg);
   background-size: cover;
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
@@ -18,7 +18,7 @@ body {
 
 .container {
   background-color: #222;
-  background-image: url(./container-PhotoRoom.png);
+  background-image: url(/container-PhotoRoom.png);
   color: white;
   border-radius: 0.8rem;
   border: 1px solid #777;
