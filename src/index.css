@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  background-image: url(./neom-background.jpg);
+  background-size: cover;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.container {
+  background-color: #222;
+  background-image: url(./container-PhotoRoom.png);
+  color: white;
+  border-radius: 0.8rem;
+  width: 500px;
+  min-height: 250px;
+  padding: 20px;
+}
+
+.container header {
+  display: flex;
+  gap: 1rem;
+}
+
+.container header input {
+  border: none;
+  border-radius: 0.4rem;
+  height: 2.2rem;
+  width: 80%;
+  padding: 5px 7px;
+  font-size: 1rem;
+}
+
+.container header button {
+  background-color: #10323e;
+  color: white;
+  border: none;
+  border-radius: 0.4rem;
+  height: 2.2rem;
+  padding: 5px 7px;
+  font-size: 1rem;
+  cursor: pointer;
+  float: right;
+}
+
+.container header button:hover {
+  background-color: #35474e;
+  
+}
+.container header button:active {
+  background-color: #405b65;
+}
+
+.list-container {
+  list-style-type: none;
+  margin-top: 2rem;
+}
+
+.item {
+  background-color: white;
+  color: #333;
+  padding: 12px;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.active {
+  background-color: #7cacf8;
+  text-decoration: line-through;
+}
+
+.item button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 1.6rem;
+  line-height: 0;
+}
+.item button:focus-visible {
+  outline: 2px solid #333;
+  border-radius: 0.4rem;
+}
+.edit-button {
+  color: #10323e;
+  margin-right: 10px;
+}
+.item span {
+  flex: 1;
+}
+.trash-button {
+  color: #dd2626;
+  float: right;
+}
+
+@media (max-width: 550px) {
+  .container {
+      width: 90vw;
+  }
+}
